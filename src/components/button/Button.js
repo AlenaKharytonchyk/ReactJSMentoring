@@ -1,4 +1,5 @@
 import React from "react";
+import "./Button.scss";
 
 export default class Button extends React.Component {
     constructor({buttonName, priority, onClick}) {
@@ -12,7 +13,7 @@ export default class Button extends React.Component {
         return React.createElement(
             'button',
             {
-                className: `button-${this.buttonName}`,
+                className: `button button-${this.buttonName}`,
                 onClick: () => this.onClick(this.priority),
             },
             this.buttonName);

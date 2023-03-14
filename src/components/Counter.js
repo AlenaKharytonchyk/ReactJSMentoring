@@ -1,5 +1,6 @@
 import React from "react";
-import Button from "./Button";
+import Button from "./button/Button";
+import Title from "./title/Title";
 export default class Counter extends React.Component {
     constructor() {
         super();
@@ -13,13 +14,14 @@ export default class Counter extends React.Component {
     render() {
        return (
            <div>
+               <Title />
                <Button
                    buttonName='plus'
                    initialValue={this.state.initialValue}
                    priority={true}
                    onClick={(priority) => this.counterUpdate(priority)}
                />
-               { React.createElement('div', {}, this.state.initialValue) }
+               { React.createElement('div', {style: {color: '#FFF'}}, this.state.initialValue) }
                <Button
                    buttonName='minus'
                    initialValue={this.state.initialValue}
@@ -27,7 +29,6 @@ export default class Counter extends React.Component {
                    onClick={(priority) => this.counterUpdate(priority)}
                />
            </div>
-
        )
     }
 }
