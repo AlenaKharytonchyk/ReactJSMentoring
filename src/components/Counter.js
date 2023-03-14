@@ -2,10 +2,10 @@ import React from "react";
 import Button from "./button/Button";
 import Title from "./title/Title";
 export default class Counter extends React.Component {
-    constructor() {
+    constructor({initialValue}) {
         super();
         this.state={
-            initialValue : 0
+            initialValue : initialValue
         }
     }
     counterUpdate (priority) {
