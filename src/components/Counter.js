@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "./button/Button";
-import Title from "./title/Title";
+import { Button, Title } from "../components";
+
 export default class Counter extends React.Component {
     constructor({initialValue}) {
         super();
@@ -9,7 +9,11 @@ export default class Counter extends React.Component {
         }
     }
     counterUpdate (priority) {
-        this.setState({initialValue: priority ? this.state.initialValue + 1 : this.state.initialValue - 1 })
+        this.setState(({ initialValue }) => {
+            return ({
+                initialValue: priority ? initialValue + 1 : initialValue - 1
+            })
+        })
     }
     render() {
        return (

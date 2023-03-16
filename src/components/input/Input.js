@@ -1,6 +1,6 @@
 import React from "react";
 import './Input.scss';
-import Button from "../button/Button";
+import { Button } from "../../components";
 
 export default class InputField extends React.Component {
     constructor({inputValue, onSearch}) {

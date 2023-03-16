@@ -1,9 +1,5 @@
 import './App.css';
-import Title from "./components/title/Title";
-import Counter from "./components/Counter";
-import Container from "./components/container/Container";
-import InputField from "./components/input/Input";
-import GenreSelect from "./components/genreSelect/GenreSelect";
+import { Title, Counter, Container, InputField, GenreSelect } from "./components";
 
 function App() {
   return (
