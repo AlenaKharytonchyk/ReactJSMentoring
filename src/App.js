@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { Title, Counter, Container, InputField, GenreSelect } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Container>
+          <Title title="Counter Task" />
+          <Counter initialValue={0} />
+        </Container>
+        <Container>
+            <Title title="Search field Task" />
+            <InputField
+                inputValue="What do you want to watch?"
+                onSearch={(value) => alert(value)}
+            />
+        </Container>
+        <Container>
+            <Title title="Genre select Task" />
+            <GenreSelect
+                genreList={["all", "comedy", "drama", "detective"]}
+                onSelect={(genre) => alert(genre)}
+                selected="comedy"
+            />
+        </Container>
     </div>
   );
 }

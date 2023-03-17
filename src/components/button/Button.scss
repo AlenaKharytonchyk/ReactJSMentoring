@@ -1,0 +1,22 @@
+.button {
+  background-color: #3dcd58;
+  border-radius: 4px;
+  color: #FFFFFF;
+  padding: 18px;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  cursor: pointer;
+
+  &-search {
+    background: #F65261;
+
+    &:hover {
+      background-color: #c84d7b;
+    }
+
+    &:active {
+      background-color: #b10043;
+    }
+  }
+}
