@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Title } from "../index";
+import { Button, Title } from "../../components";
 
 export default class Counter extends React.Component {
     constructor({initialValue}) {
