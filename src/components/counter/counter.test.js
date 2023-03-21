@@ -6,7 +6,7 @@ import userEvent from "@testing-library/user-event";
 describe("Counter", () => {
     it("renders initial value provided in props", () => {
         render(<Counter initialValue={0} />);
-        const initialValue = screen.getByText("0");
+        const initialValue = screen.queryByText("0");
 
         expect(initialValue).toBeInTheDocument();
     });
@@ -17,7 +17,7 @@ describe("Counter", () => {
         const initialValue = 4
         render(<Counter initialValue={initialValue} />);
 
-        await userEvent.click(screen.getByText("minus"));
+        await userEvent.click(screen.queryByText("minus"));
         const counterElement = screen.getByTestId("value-element");
 
         expect(counterElement).toHaveTextContent(initialValue - 1);
@@ -29,7 +29,7 @@ describe("Counter", () => {
         const initialValue = 4
         render(<Counter initialValue={initialValue} />);
 
-        await userEvent.click(screen.getByText("plus"));
+        await userEvent.click(screen.queryByText("plus"));
         const counterElement = screen.getByTestId("value-element");
 
         expect(counterElement).toHaveTextContent(initialValue + 1);
