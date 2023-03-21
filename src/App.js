@@ -1,5 +1,5 @@
 import './App.css';
-import { Title, Counter, Container, InputField, GenreSelect } from "./components";
+import { Title, Counter, Container, InputField, GenreSelect, MovieContainer } from "./components";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
                 selected="comedy"
             />
         </Container>
+        <MovieContainer />
     </div>
   );
 }

@@ -1,0 +1,43 @@
+.movie-card-container {
+  background-color: #232323;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #FFFFFF;
+  opacity: 0.7;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  width: 325px;
+
+  img {
+    background-color: lightgray;
+    height: 425px;
+    min-height: 425px;
+    min-width: 325px;
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+
+    .title {
+      text-align: start;
+      line-height: 28px;
+      margin-right: 20px;
+    }
+
+    .year {
+      border: 1px solid #979797;
+      border-radius: 3px;
+      padding: 5px;
+    }
+  }
+
+
+  .genre {
+
+  }
+}
