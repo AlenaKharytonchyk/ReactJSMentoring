@@ -25,7 +25,13 @@ export default class Counter extends React.Component {
                    priority={true}
                    onClick={(priority) => this.counterUpdate(priority)}
                />
-               { React.createElement('div', {style: {color: '#FFF'}, 'data-testid': 'value-element'}, this.state.initialValue) }
+               { React.createElement('span', {
+                   style: {
+                       color: '#FFF',
+                       backgroundColor: '#3dcd58',
+                       fontWeight: 'bold',
+                       padding: '10px'
+                   }, 'data-testid': 'value-element'}, this.state.initialValue) }
                <Button
                    buttonName='minus'
                    initialValue={this.state.initialValue}
