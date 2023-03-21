@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Title } from "../components";
+import { Button, Title } from "../../components";
 
 export default class Counter extends React.Component {
     constructor({initialValue}) {
@@ -25,7 +25,7 @@ export default class Counter extends React.Component {
                    priority={true}
                    onClick={(priority) => this.counterUpdate(priority)}
                />
-               { React.createElement('div', {style: {color: '#FFF'}}, this.state.initialValue) }
+               { React.createElement('div', {style: {color: '#FFF'}, 'data-testid': 'value-element'}, this.state.initialValue) }
                <Button
                    buttonName='minus'
                    initialValue={this.state.initialValue}
