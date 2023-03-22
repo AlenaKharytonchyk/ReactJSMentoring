@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetails renders snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="movie-details-container"
+    data-testid="movie-details"
+  >
+    <img
+      alt="First film"
+      src="https://picsum.photos/323/486?random=1"
+    />
+    <div
+      class="side-container"
+    >
+      <div
+        class="title-wrapper"
+      >
+        <h2
+          class="title"
+        >
+          First film
+        </h2>
+        <span
+          class="rating"
+        >
+          8,2
+        </span>
+      </div>
+      <div
+        class="genre"
+      >
+        drama, comedy
+      </div>
+      <div
+        class="year-wrapper"
+      >
+        <span
+          class="year"
+        >
+          2000
+        </span>
+        <span
+          class="duration"
+        >
+          1.4
+        </span>
+      </div>
+      <p
+        class="description"
+      >
+        Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

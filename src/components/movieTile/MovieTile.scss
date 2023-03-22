@@ -6,7 +6,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   color: #FFFFFF;
-  opacity: 0.7;
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   line-height: 22px;
@@ -22,6 +21,7 @@
   .title-container {
     display: flex;
     align-items: center;
+    opacity: 0.7;
 
     .title {
       text-align: start;
@@ -36,8 +36,7 @@
     }
   }
 
-
   .genre {
-
+    opacity: 0.7;
   }
 }

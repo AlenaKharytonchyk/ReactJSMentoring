@@ -11,7 +11,7 @@ const movie = {
     id: 1,
 }
 describe("MovieTile", () => {
-    it("presents on the page", async () => {
+    it("presents on the page", () => {
         expect.assertions(1);
 
         const onClick = jest.fn();

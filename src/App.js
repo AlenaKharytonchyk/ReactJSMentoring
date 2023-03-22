@@ -1,5 +1,6 @@
 import './App.css';
-import { Title, Counter, Container, InputField, GenreSelect, MovieContainer } from "./components";
+import {Title, Counter, Container, InputField, GenreSelect, MovieContainer, MovieDetails} from "./components";
+import {moviesArray} from "./mockedMovies";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 selected="comedy"
             />
         </Container>
+        <MovieDetails movie={moviesArray[0]} />
         <MovieContainer />
     </div>
   );
