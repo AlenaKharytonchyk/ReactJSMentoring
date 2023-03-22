@@ -1,5 +1,14 @@
 import './App.css';
-import {Title, Counter, Container, InputField, GenreSelect, MovieContainer, MovieDetails} from "./components";
+import {
+    Title,
+    Counter,
+    Container,
+    InputField,
+    GenreSelect,
+    MovieContainer,
+    MovieDetails,
+    SortControl
+} from "./components";
 import {moviesArray} from "./mockedMovies";
 
 function App() {
@@ -23,6 +32,9 @@ function App() {
                 onSelect={(genre) => alert(genre)}
                 selected="comedy"
             />
+        </Container>
+        <Container>
+            <SortControl selectedOption="title" options={["release date", "title"]} onSelect={(option) => alert(option)} />
         </Container>
         <MovieDetails movie={moviesArray[0]} />
         <MovieContainer />

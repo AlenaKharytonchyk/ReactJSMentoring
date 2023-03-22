@@ -8,5 +8,6 @@ import MovieTile from "./movieTile/MovieTile";
 import MovieContainer from "../containers/movieContainer/MovieContainer";
 import PopUp from "./popUp/PopUp";
 import MovieDetails from "./movieDetails/MovieDetails";
+import SortControl from "./sortControl/SortControl";
 
-export { Button, Container, GenreSelect, InputField, Title, Counter,MovieTile, MovieContainer, PopUp,MovieDetails };
+export { Button, Container, GenreSelect, InputField, Title, Counter,MovieTile, MovieContainer, PopUp,MovieDetails, SortControl };
