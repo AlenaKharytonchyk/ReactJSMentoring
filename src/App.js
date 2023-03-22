@@ -34,7 +34,7 @@ function App() {
             />
         </Container>
         <Container>
-            <SortControl selectedOption="title" options={["release date", "title"]} onSelect={(option) => alert(option)} />
+            <SortControl selectedOption="release date" options={["release date", "title"]} onSelect={(option) => alert(option)} />
         </Container>
         <MovieDetails movie={moviesArray[0]} />
         <MovieContainer />
