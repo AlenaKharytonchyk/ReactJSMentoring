@@ -32,7 +32,7 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
 
     return (
         <Dialog title={formTitle} showModal={showModal}>
-            <div className="movie-form-container">
+            <div data-testid="movie-form" className="movie-form-container">
                 <form action="" method="post" onSubmit={handleSubmit}>
                     <div className="field-container">
                         <label htmlFor="title">{formLabels.title}</label>
@@ -52,7 +52,7 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
                     </div>
                     <div className="field-container">
                         <label htmlFor="genre">{formLabels.genre}</label>
-                        <select name="sort" id="sort" data-testid="sorting" defaultValue={initialMovie?.genre[0]}>
+                        <select name="sort" id="sort" data-testid="sorting">
                             {
                                 genreOptions.map((option, id) =>( <option data-testid={option} key={id} value={option}>{option.toUpperCase()}</option>))
                             }
@@ -63,7 +63,7 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
                         <textarea id="overview" name="overview" defaultValue={initialMovie?.description}></textarea>
                     </div>
                     <input onReset={handleReset} className="button-transparent button" type="reset" value="RESET"/>
-                    <input onSubmit={handleSubmit} className="button-pink button" type="submit" value="SUBMIT"/>
+                    <input onSubmit={handleSubmit} data-testid="submit-button" className="button-pink button" type="submit" value="SUBMIT"/>
                 </form>
             </div>
         </Dialog>

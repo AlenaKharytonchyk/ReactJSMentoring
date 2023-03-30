@@ -11,10 +11,10 @@ const Dialog = ({title, children, showModal}) => {
     return modalVisible
         ? (
         createPortal(
-            <div className="modal-container">
+            <div className="modal-container" data-testid="dialog">
                 <div className="title">{title.toUpperCase()}</div>
                 <div className="dialog-body">{children}</div>
-                <button className="close-button" onClick={() => setModalVisible(false)}>X</button>
+                <button data-testid="close-button" className="close-button" onClick={() => setModalVisible(false)}>X</button>
             </div>,
             document.body
         )
