@@ -28,8 +28,7 @@ export const moviesArray = [
         year: "2010",
         duration: "1.4",
         id: 3,
-    }
-    ,
+    },
     {
         image: "",
         title: "Fourth film",
