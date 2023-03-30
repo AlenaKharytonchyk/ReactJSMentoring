@@ -9,5 +9,21 @@ import MovieContainer from "../containers/movieContainer/MovieContainer";
 import PopUp from "./popUp/PopUp";
 import MovieDetails from "./movieDetails/MovieDetails";
 import SortControl from "./sortControl/SortControl";
+import Dialog from "./dialog/Dialog";
+import MovieForm from "./movieForm/MovieForm";
 
-export { Button, Container, GenreSelect, InputField, Title, Counter,MovieTile, MovieContainer, PopUp,MovieDetails, SortControl };
+export {
+    Button,
+    Container,
+    GenreSelect,
+    InputField,
+    Title,
+    Counter,
+    MovieTile,
+    MovieContainer,
+    PopUp,
+    MovieDetails,
+    SortControl,
+    Dialog,
+    MovieForm
+};

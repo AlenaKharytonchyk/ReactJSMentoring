@@ -8,6 +8,7 @@
   border: none;
   cursor: pointer;
 
+  &-pink,
   &-search {
     background: #F65261;
 
@@ -17,6 +18,20 @@
 
     &:active {
       background-color: #b10043;
+    }
+  }
+
+  &-transparent {
+    color: #F65261;
+    border: 1px solid #F65261;
+    background: transparent;
+
+    &:hover {
+      border: 1px solid #c84d7b;
+    }
+
+    &:active {
+      border: 1px solid #b10043;
     }
   }
 }
