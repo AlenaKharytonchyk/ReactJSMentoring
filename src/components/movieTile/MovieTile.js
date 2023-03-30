@@ -14,7 +14,7 @@ const MovieTile = ({title, image, genre, year, handleClick}) => {
             <img src={image} alt={title} />
             <div className="title-container">
                 <h2 className="title">{title}</h2>
-                <span className="year">{year}</span>
+                <span className="year">{new Date(year).getFullYear()}</span>
             </div>
             <div className="genre">{genre}</div>
         </div>

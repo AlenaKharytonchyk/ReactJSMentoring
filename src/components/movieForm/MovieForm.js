@@ -40,19 +40,19 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
                     </div>
                     <div className="field-container">
                         <label htmlFor="release_date">{formLabels.release_date}</label>
-                        <input type="date" id="release_date" name="release_date"/>
+                        <input type="date" id="release_date" name="release_date" defaultValue={initialMovie?.year}/>
                     </div>
                     <div className="field-container">
                         <label htmlFor="url">{formLabels.url}</label>
-                        <input type="text" id="url" name="movie_url"></input>
+                        <input type="text" id="url" name="movie_url" defaultValue={initialMovie?.image}></input>
                     </div>
                     <div className="field-container">
                         <label htmlFor="runtime">{formLabels.runtime}</label>
-                        <input type="text" id="runtime" name="runtime"></input>
+                        <input type="text" id="runtime" name="runtime" defaultValue={initialMovie?.duration}></input>
                     </div>
                     <div className="field-container">
                         <label htmlFor="genre">{formLabels.genre}</label>
-                        <select name="sort" id="sort" data-testid="sorting">
+                        <select name="sort" id="sort" data-testid="sorting" defaultValue={initialMovie?.genre[0]}>
                             {
                                 genreOptions.map((option, id) =>( <option data-testid={option} key={id} value={option}>{option.toUpperCase()}</option>))
                             }
@@ -60,13 +60,12 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
                     </div>
                     <div className="field-container full-width">
                         <label htmlFor="overview">{formLabels.overview}:</label>
-                        <textarea id="overview" name="overview"></textarea>
+                        <textarea id="overview" name="overview" defaultValue={initialMovie?.description}></textarea>
                     </div>
                     <input onReset={handleReset} className="button-transparent button" type="reset" value="RESET"/>
                     <input onSubmit={handleSubmit} className="button-pink button" type="submit" value="SUBMIT"/>
                 </form>
             </div>
-
         </Dialog>
     )
 }

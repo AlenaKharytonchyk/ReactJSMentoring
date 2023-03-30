@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./Dialog.scss";
 import {createPortal} from "react-dom";
 
 const Dialog = ({title, children, showModal}) => {
     const [modalVisible, setModalVisible] = useState(showModal);
+    useEffect(() => {
+        setModalVisible(showModal);
+    }, [showModal])
 
     return modalVisible
         ? (
