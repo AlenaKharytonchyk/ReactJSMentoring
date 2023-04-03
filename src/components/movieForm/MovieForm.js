@@ -2,23 +2,23 @@ import React from "react";
 import "./MovieForm.scss";
 import {Dialog} from "../index";
 
+let formLabels = {
+    title: 'title',
+    release_date: 'Release date',
+    url: 'movie url',
+    rating: 'rating',
+    genre: 'genre',
+    runtime: 'runtime',
+    overview: 'overview'
+};
+
+const genreOptions = ["all", "comedy", "drama", "detective"];
+
+Object.keys(formLabels).forEach((key) => {
+    formLabels[key] = formLabels[key].toUpperCase();
+});
+
 const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
-    let formLabels = {
-        title: 'title',
-        release_date: 'Release date',
-        url: 'movie url',
-        rating: 'rating',
-        genre: 'genre',
-        runtime: 'runtime',
-        overview: 'overview'
-    };
-
-    const genreOptions = ["all", "comedy", "drama", "detective"];
-
-    Object.keys(formLabels).forEach((key) => {
-        formLabels[key] = formLabels[key].toUpperCase();
-    });
-
     const handleReset = () => {
         document.querySelector('form').reset();
     };
