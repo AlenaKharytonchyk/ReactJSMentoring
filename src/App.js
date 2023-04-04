@@ -7,7 +7,8 @@ import {
     GenreSelect,
     MovieContainer,
     MovieDetails,
-    SortControl
+    SortControl,
+    MovieForm
 } from "./components";
 import {moviesArray} from "./mockedMovies";
 
@@ -38,6 +39,7 @@ function App() {
         </Container>
         <MovieDetails movie={moviesArray[0]} />
         <MovieContainer />
+        <MovieForm formTitle="Add movie" submitCallback={(formData) => console.warn(formData)} initialMovie={moviesArray[0]} showModal={true}/>
     </div>
   );
 }

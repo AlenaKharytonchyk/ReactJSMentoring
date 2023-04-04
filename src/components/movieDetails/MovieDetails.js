@@ -16,7 +16,7 @@ const MovieDetails = ({movie}) => {
                 </div>
                 <div className="genre">{movie.genre}</div>
                 <div className="year-wrapper">
-                    <span className="year">{movie.year}</span>
+                    <span className="year">{new Date(movie.year).getFullYear()}</span>
                     <span className="duration">{movie.duration}</span>
                 </div>
                 <p className="description">{movie.description}</p>

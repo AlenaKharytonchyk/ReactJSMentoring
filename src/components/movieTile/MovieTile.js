@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./MovieTile.scss";
 import {PopUp} from "../index";
+import convertDateIntoYear from "../../utils";
 
 const MovieTile = ({title, image, genre, year, handleClick}) => {
     return (
@@ -14,7 +15,7 @@ const MovieTile = ({title, image, genre, year, handleClick}) => {
             <img src={image} alt={title} />
             <div className="title-container">
                 <h2 className="title">{title}</h2>
-                <span className="year">{year}</span>
+                <span className="year">{convertDateIntoYear(year)}</span>
             </div>
             <div className="genre">{genre}</div>
         </div>
