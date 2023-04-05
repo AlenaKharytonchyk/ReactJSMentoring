@@ -16,12 +16,12 @@ const MovieTile = ({movie, handleClick}) => {
                 data-testid="movie-card"
             >
                 <PopUp movie={movie} onDelete={()=>setShowModal(true)} onEdit={()=>setShowEditModal(true)}/>
-                <img src={movie.image} alt={movie.title} />
+                <img src={movie.poster_path} alt={movie.title} />
                 <div className="title-container">
                     <h2 className="title">{movie.title}</h2>
-                    <span className="year">{convertDateIntoYear(movie.year)}</span>
+                    <span className="year">{convertDateIntoYear(movie.release_date)}</span>
                 </div>
-                <div className="genre">{movie.genre}</div>
+                <div className="genre">{movie.genres}</div>
             </div>
             <Dialog
                 showModal ={showModal}
@@ -45,16 +45,16 @@ MovieTile.propTypes = {
     movie: PropTypes.shape(
         {
             title: PropTypes.string.isRequired,
-            genre: PropTypes.array,
-            year: PropTypes.string.isRequired,
-            image: PropTypes.string.isRequired
+            genres: PropTypes.array,
+            release_date: PropTypes.string.isRequired,
+            poster_path: PropTypes.string.isRequired
         }
     )
 }
 
 MovieTile.defaultProps = {
     title: "Mocked title",
-    genre: ["Mocked genre"],
-    year: "Mocked year",
+    genres: ["Mocked genre"],
+    release_date: 2020,
 }
 export default MovieTile;

@@ -1,13 +1,12 @@
 import React from "react";
 import {MovieTile} from "../../components";
 import "./MovieContainer.scss";
-import {moviesArray} from "../../mockedMovies";
 
-const MovieContainer = ({onMovieSelect}) => {
+const MovieContainer = ({onMovieSelect, movieList}) => {
     return (
         <div className="movie-wrapper">
             {
-                moviesArray.map((movie) => (
+                movieList.map((movie) => (
                     <MovieTile
                         movie={movie}
                         key={movie.id}
