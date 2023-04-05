@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import "./MovieDetails.scss";
 
-const MovieDetails = ({movie}) => {
+const MovieDetails = ({movie, onClose}) => {
     return (
         <div
             className="movie-details-container"
             data-testid="movie-details"
         >
+            <div className='details-close' onClick={onClose} data-testid="details-close">X</div>
             <img src={movie.image} alt={movie.title} />
             <div className="side-container">
                 <div className="title-wrapper">

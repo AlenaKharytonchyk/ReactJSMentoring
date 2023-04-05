@@ -24,16 +24,19 @@ const MovieListPage = () => {
     return (
         <div className={`movie-page-wrapper ${movieModalVisible ? 'modal-open' : ''}`}>
             <div className="header">
-                <Logo/>
-                <Button buttonName="+ ADD MOVIE" buttonClass="button-grey" onClick={() => setMovieModalVisible(true)} />
-                <Title title="Search field Task" />
                 {
                     selectedMovie
-                    ? <MovieDetails movie={selectedMovie} />
-                    : <InputField
+                    ? <MovieDetails movie={selectedMovie} onClose={() => setSelectedMovie(null)}/>
+                    : <>
+                        <Logo/>
+                        <Button buttonName="+ ADD MOVIE" buttonClass="button-grey" onClick={() => setMovieModalVisible(true)} />
+                        <Title title="Search field Task" />
+                        <InputField
                         inputValue={searchQuery}
                         onSearch={(value) => setSearchQuery(value)}
-                    />
+                        />
+                    </>
+
                 }
             </div>
             <Container>

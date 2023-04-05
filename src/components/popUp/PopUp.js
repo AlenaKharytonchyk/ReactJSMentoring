@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import "./PopUp.scss";
 import {Button, Dialog, MovieForm} from "../index";
 
-const PopUp = ({movie}) => {
+const PopUp = ({onDelete, onEdit}) => {
     const [opened, setOpened] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
 
     const expandMenu = (e) => {
         e.preventDefault();
@@ -22,13 +20,13 @@ const PopUp = ({movie}) => {
     const handleClick = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        setShowModal(true);
+        onDelete();
     }
 
     const handleEditClick = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      setShowEditModal(true);
+      onEdit();
     }
 
     return (
@@ -45,20 +43,6 @@ const PopUp = ({movie}) => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 256 256"><path fill="white" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28Zm-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28Zm0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28Z"/></svg>
                 </div>)
             }
-            <Dialog
-                showModal ={showModal}
-                title="Delete MOVIE"
-                onClose={() => setShowModal(false)}
-            >
-                <div>Are you sure you want to delete this movie?</div>
-                <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} buttonClass="button-pink"/>
-            </Dialog>
-            <MovieForm
-                showModal={showEditModal}
-                formTitle="edit movie"
-                initialMovie={movie}
-                onClose={() => setShowEditModal(false)}
-            />
         </>
 
     )

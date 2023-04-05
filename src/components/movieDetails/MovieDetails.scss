@@ -10,6 +10,12 @@
   line-height: 22px;
   width: auto;
 
+  .details-close {
+    position: absolute;
+    right: 30px;
+    cursor: pointer;
+  }
+
   img {
     background-color: lightgray;
     height: 425px;
