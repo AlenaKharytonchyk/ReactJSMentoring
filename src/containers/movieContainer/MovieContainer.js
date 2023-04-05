@@ -9,10 +9,7 @@ const MovieContainer = ({onMovieSelect}) => {
             {
                 moviesArray.map((movie) => (
                     <MovieTile
-                        title={movie.title}
-                        image={movie.image}
-                        year={movie.year}
-                        genre={movie.genre}
+                        movie={movie}
                         key={movie.id}
                         handleClick={() => onMovieSelect(movie)}
                     />

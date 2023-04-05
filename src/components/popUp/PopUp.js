@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import "./PopUp.scss";
-import {Button, Dialog} from "../index";
+import {Button, Dialog, MovieForm} from "../index";
 
-const PopUp = () => {
+const PopUp = ({movie}) => {
     const [opened, setOpened] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const expandMenu = (e) => {
         e.preventDefault();
@@ -22,7 +23,12 @@ const PopUp = () => {
         e.stopPropagation();
         e.preventDefault();
         setShowModal(true);
-        console.warn('Delete');
+    }
+
+    const handleEditClick = (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      setShowEditModal(true);
     }
 
     return (
@@ -31,7 +37,7 @@ const PopUp = () => {
                 ? (<div className="open-state">
                     <div onClick={closeMenu} data-testid="popup-close">X</div>
                     <div className="wrapper">
-                        <span>EDIT</span>
+                        <span onClick={handleEditClick}>EDIT</span>
                         <span onClick={handleClick}>DELETE</span>
                     </div>
                 </div>)
@@ -47,6 +53,12 @@ const PopUp = () => {
                 <div>Are you sure you want to delete this movie?</div>
                 <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} buttonClass="button-pink"/>
             </Dialog>
+            <MovieForm
+                showModal={showEditModal}
+                formTitle="edit movie"
+                initialMovie={movie}
+                onClose={() => setShowEditModal(false)}
+            />
         </>
 
     )

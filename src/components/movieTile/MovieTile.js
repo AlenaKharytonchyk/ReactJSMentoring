@@ -4,29 +4,33 @@ import "./MovieTile.scss";
 import {PopUp} from "../index";
 import convertDateIntoYear from "../../utils";
 
-const MovieTile = ({title, image, genre, year, handleClick}) => {
+const MovieTile = ({movie, handleClick}) => {
     return (
         <div
             className="movie-card-container"
-            onClick={() => handleClick(title)}
+            onClick={() => handleClick(movie.title)}
             data-testid="movie-card"
         >
-            <PopUp />
-            <img src={image} alt={title} />
+            <PopUp movie={movie}/>
+            <img src={movie.image} alt={movie.title} />
             <div className="title-container">
-                <h2 className="title">{title}</h2>
-                <span className="year">{convertDateIntoYear(year)}</span>
+                <h2 className="title">{movie.title}</h2>
+                <span className="year">{convertDateIntoYear(movie.year)}</span>
             </div>
-            <div className="genre">{genre}</div>
+            <div className="genre">{movie.genre}</div>
         </div>
     )
 }
 
 MovieTile.propTypes = {
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.array,
-    year: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired
+    movie: PropTypes.shape(
+        {
+            title: PropTypes.string.isRequired,
+            genre: PropTypes.array,
+            year: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired
+        }
+    )
 }
 
 MovieTile.defaultProps = {
