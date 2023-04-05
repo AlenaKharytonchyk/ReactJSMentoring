@@ -3,7 +3,7 @@ import {MovieTile} from "../../components";
 import "./MovieContainer.scss";
 import {moviesArray} from "../../mockedMovies";
 
-const MovieContainer = () => {
+const MovieContainer = ({onMovieSelect}) => {
     return (
         <div className="movie-wrapper">
             {
@@ -14,7 +14,7 @@ const MovieContainer = () => {
                         year={movie.year}
                         genre={movie.genre}
                         key={movie.id}
-                        handleClick={(value) => alert(value)}
+                        handleClick={() => onMovieSelect(movie)}
                     />
                 ))
             }

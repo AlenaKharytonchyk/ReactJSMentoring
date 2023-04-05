@@ -18,7 +18,7 @@ Object.keys(formLabels).forEach((key) => {
     formLabels[key] = formLabels[key].toUpperCase();
 });
 
-const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
+const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}) => {
     const handleReset = () => {
         document.querySelector('form').reset();
     };
@@ -31,7 +31,7 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal}) => {
     };
 
     return (
-        <Dialog title={formTitle} showModal={showModal}>
+        <Dialog title={formTitle} showModal={showModal} onClose={onClose}>
             <div data-testid="movie-form" className="movie-form-container">
                 <form action="" method="post" onSubmit={handleSubmit}>
                     <div className="field-container">

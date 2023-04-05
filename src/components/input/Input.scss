@@ -1,7 +1,18 @@
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .button {
+    margin-top: unset;
+  }
+}
+
 .input-field {
   display: inline-block;
-  width: 50%;
-  max-width: 713px;
+  width: 100%;
+  margin-right: 30px;
   padding: 16px;
   background: #626469;
   border-radius: 4px;
@@ -14,3 +25,4 @@
   color: #FFFFFF;
   opacity: 0.8;
 }
+

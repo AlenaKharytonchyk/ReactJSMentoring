@@ -17,7 +17,7 @@ export default class InputField extends React.Component {
 
     render() {
         return (
-            <>
+            <div className="input-wrapper">
                 {React.createElement(
                     'input',
                     {
@@ -35,7 +35,7 @@ export default class InputField extends React.Component {
                     buttonName="search"
                     onClick={() => this.onSearch(this.state.inputValue)}
                 />
-            </>
+            </div>
 
         )
     }

@@ -42,6 +42,7 @@ const PopUp = () => {
             <Dialog
                 showModal ={showModal}
                 title="Delete MOVIE"
+                onClose={() => setShowModal(false)}
             >
                 <div>Are you sure you want to delete this movie?</div>
                 <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} buttonClass="button-pink"/>

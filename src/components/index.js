@@ -11,6 +11,9 @@ import MovieDetails from "./movieDetails/MovieDetails";
 import SortControl from "./sortControl/SortControl";
 import Dialog from "./dialog/Dialog";
 import MovieForm from "./movieForm/MovieForm";
+import MovieListPage from "../containers/movieListPage/MovieListPage";
+import Footer from "./footer/Footer";
+import Logo from "./logo/Logo";
 
 export {
     Button,
@@ -25,5 +28,8 @@ export {
     MovieDetails,
     SortControl,
     Dialog,
-    MovieForm
+    MovieForm,
+    MovieListPage,
+    Footer,
+    Logo
 };
