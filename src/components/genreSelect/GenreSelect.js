@@ -26,6 +26,7 @@ export default class GenreSelect extends React.Component {
                         'li',
                         {
                             className: this.state.selected === genre ? "genre active" : "genre",
+                            'data-testid': `test-${genre}`,
                             key: `${genre}-${index}`,
                             onClick: () => this.handleSelect(genre),
                         },

@@ -18,7 +18,7 @@ describe("MovieListPage", () => {
         jest.restoreAllMocks();
     });
 
-    it("search for a films selecting a movie and returning back to search", async () => {
+    it("search for a films, select a movie and returning back to search", async () => {
         expect.assertions(5);
         await act(async () => {
            render(<MovieListPage />)
@@ -40,5 +40,24 @@ describe("MovieListPage", () => {
         await userEvent.click(screen.queryByTestId('details-close'));
         expect(screen.queryByTestId('movie-details')).not.toBeInTheDocument();
         expect(screen.getByRole("textbox")).toBeInTheDocument();
+    })
+
+    it("switches genres when click on genre button", async () => {
+        expect.assertions(1);
+        const genreToSelect = 'comedy'
+        await act(async () => {
+            render(<MovieListPage />)
+        });
+        await userEvent.click(screen.queryByTestId(`test-${genreToSelect}`));
+        expect(fetchSpy).toHaveBeenCalledWith(expect.stringMatching(new RegExp(`filter=${genreToSelect}`)), expect.any(Object));
+    })
+    it("enable sorting when click on select", async () => {
+        expect.assertions(1);
+        const sortBy = 'title';
+        await act(async () => {
+            render(<MovieListPage />)
+        });
+        await userEvent.click(screen.queryByTestId(sortBy));
+        expect(fetchSpy).toHaveBeenCalledWith(expect.stringMatching(new RegExp(`searchBy=${sortBy}`)), expect.any(Object));
     })
 })
