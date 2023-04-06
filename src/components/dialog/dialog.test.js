@@ -5,26 +5,28 @@ import userEvent from "@testing-library/user-event";
 
 describe("Dialog", () => {
     it("presents on the page", () => {
-        render(<Dialog
+        render(<div className="App"><Dialog
             showModal={true}
             title="Random title"
             children={<div data-testid="dialog-child-test">This my child prop</div>}
-        />)
+        /></div>)
 
         expect(screen.queryByTestId('dialog-child-test')).toBeInTheDocument();
     })
 
     it("calls 'onClick' and  close dialog after click on a close button", async () => {
         expect.assertions(1);
+        const onClose = jest.fn();
 
-        render(<Dialog
+        render(<div className="App"><Dialog
             showModal={true}
             title="Random title"
             children={<div data-testid="dialog-child-test">This my child prop</div>}
-        />)
+            onClose={onClose()}
+        /></div>)
 
         await userEvent.click(screen.queryByTestId('close-button'));
 
-        expect(screen.queryByTestId('dialog')).not.toBeInTheDocument();
+        expect(onClose).toHaveBeenCalledWith();
     })
 })

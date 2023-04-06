@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieForm renders snapshot 1`] = `
+<div
+  class="movie-form-container"
+  data-testid="movie-form"
+>
+  <form
+    action=""
+    method="post"
+  >
+    <div
+      class="field-container"
+    >
+      <label
+        for="title"
+      >
+        TITLE
+      </label>
+      <input
+        id="title"
+        name="movie_name"
+        type="text"
+        value="Fifty Shades Freed"
+      />
+    </div>
+    <div
+      class="field-container"
+    >
+      <label
+        for="release_date"
+      >
+        RELEASE DATE
+      </label>
+      <input
+        id="release_date"
+        name="release_date"
+        type="date"
+        value="2018-02-07"
+      />
+    </div>
+    <div
+      class="field-container"
+    >
+      <label
+        for="url"
+      >
+        MOVIE URL
+      </label>
+      <input
+        id="url"
+        name="movie_url"
+        type="text"
+        value="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+      />
+    </div>
+    <div
+      class="field-container"
+    >
+      <label
+        for="runtime"
+      >
+        RUNTIME
+      </label>
+      <input
+        id="runtime"
+        name="runtime"
+        type="text"
+        value="106"
+      />
+    </div>
+    <div
+      class="field-container"
+    >
+      <label
+        for="genre"
+      >
+        GENRE
+      </label>
+      <select
+        data-testid="sorting"
+        id="sort"
+        name="sort"
+      >
+        <option
+          data-testid="all"
+          value="all"
+        >
+          ALL
+        </option>
+        <option
+          data-testid="comedy"
+          value="comedy"
+        >
+          COMEDY
+        </option>
+        <option
+          data-testid="drama"
+          value="drama"
+        >
+          DRAMA
+        </option>
+        <option
+          data-testid="detective"
+          value="detective"
+        >
+          DETECTIVE
+        </option>
+      </select>
+    </div>
+    <div
+      class="field-container full-width"
+    >
+      <label
+        for="overview"
+      >
+        OVERVIEW
+        :
+      </label>
+      <textarea
+        id="overview"
+        name="overview"
+      >
+        Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.
+      </textarea>
+    </div>
+    <input
+      class="button-transparent button"
+      type="reset"
+      value="RESET"
+    />
+    <input
+      class="button-pink button"
+      data-testid="submit-button"
+      type="submit"
+      value="SUBMIT"
+    />
+  </form>
+</div>
+`;

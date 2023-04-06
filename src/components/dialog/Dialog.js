@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Dialog.scss";
 import {createPortal} from "react-dom";
 import FocusTrap from "focus-trap-react";
 
 const Dialog = ({title, children, showModal, onClose}) => {
+    const [container, setContainer] = useState();
 
-    return showModal
+    useEffect(() => {
+        setContainer(document.querySelector('.App'))
+    }, [])
+
+    return showModal && container
         ? (
         createPortal(
             <FocusTrap>
@@ -15,7 +20,7 @@ const Dialog = ({title, children, showModal, onClose}) => {
                     <button data-testid="close-button" className="close-button" onClick={onClose}>X</button>
                 </div>
             </FocusTrap>,
-            document.querySelector('.App')
+            container
         )
     )
         : null;

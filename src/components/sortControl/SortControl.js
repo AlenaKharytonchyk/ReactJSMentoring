@@ -12,7 +12,7 @@ const SortControl = ({selectedOption, options, onSelect}) => {
 
             <select name="sort" id="sort" data-testid="sorting" onChange={handleChange} defaultValue={selectedOption} >
                 {
-                    options.map(({option, value}, id) =>( <option data-testid={option} key={id} value={value}>{option.toUpperCase()}</option>))
+                    options.map(({option, value}, id) =>( <option data-testid={value} key={id} value={value}>{option.toUpperCase()}</option>))
                 }
             </select>
         </div>

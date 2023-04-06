@@ -2,27 +2,23 @@ import React from "react";
 import {MovieForm} from "../../components";
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
-const movie = {
-        image: "https://picsum.photos/323/486?random=1",
-        title: "First film",
-        description: "Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra",
-        rating: "8,2",
-        genre: ["drama, comedy"],
-        year: "2000-01-01",
-        duration: "1.4",
-        id: 1,
-}
+import {moviesArray} from "../../mockedMovies";
 
 describe("MovieForm", () => {
     it("renders snapshot", () => {
         expect.assertions(1);
 
-        render(<MovieForm
-            formTitle="Form title"
-            showModal={true}
-            initialMovie={movie}
-        />);
+        const onClose = jest.fn();
+
+        render(
+            <div className="App">
+                <MovieForm
+                formTitle="Form title"
+                showModal={true}
+                onClose={onClose}
+                initialMovie={moviesArray[0]}/>
+            </div>
+        );
         const modalComponent = screen.getByTestId('movie-form');
         expect(modalComponent).toMatchSnapshot();
     })
@@ -33,19 +29,19 @@ describe("MovieForm", () => {
         const onSubmit = jest.fn();
 
         const expected = {
-            "movie_name": movie.title,
-            "movie_url": movie.image,
-            "overview": movie.description,
-            "release_date": movie.year,
-            "runtime": movie.duration,
+            "movie_name": moviesArray[0].title,
+            "movie_url": moviesArray[0].poster_path,
+            "overview": moviesArray[0].overview,
+            "release_date": moviesArray[0].release_date,
+            "runtime": moviesArray[0].runtime.toString(),
             "sort": "all",
         }
 
-        render(<MovieForm
+        render(<div className="App"><MovieForm
             formTitle="Form title"
             submitCallback={onSubmit}
             showModal={true}
-            initialMovie={movie}/>);
+            initialMovie={moviesArray[0]}/></div>);
 
         await userEvent.click(screen.queryByTestId('submit-button'));
 
