@@ -1,7 +1,7 @@
 export const moviesArray = [
     {
         id: 337167,
-        title: "Fifty Shades Freed",
+        title: "Star movie",
         tagline: "Don't miss the climax",
         vote_average: 6.1,
         vote_count: 1195,
