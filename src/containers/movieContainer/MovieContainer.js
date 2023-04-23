@@ -1,8 +1,10 @@
 import React from "react";
 import {MovieTile} from "../../components";
 import "./MovieContainer.scss";
+import {useNavigate} from "react-router-dom";
 
-const MovieContainer = ({onMovieSelect, movieList}) => {
+const MovieContainer = ({movieList}) => {
+    const navigate = useNavigate();
     return (
         <div className="movie-wrapper">
             {
@@ -10,7 +12,7 @@ const MovieContainer = ({onMovieSelect, movieList}) => {
                     <MovieTile
                         movie={movie}
                         key={movie.id}
-                        handleClick={() => onMovieSelect(movie)}
+                        handleClick={() => navigate(`/${movie.id}`)}
                     />
                 ))
             }
