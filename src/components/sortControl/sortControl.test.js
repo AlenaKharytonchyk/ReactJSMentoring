@@ -5,8 +5,14 @@ import userEvent from "@testing-library/user-event";
 
 
 const selectedOption="title";
-const receivedValue = "release date"
-const options=["release date", "title"];
+const receivedValue = "release_date";
+const options = [{
+    option: "release date",
+    value: "release_date",
+},{
+    option: "title",
+    value: "title",
+}];
 
 describe("SortControl", () => {
     it("calls 'onSelect' and  pass selected prop when select different option", async () => {

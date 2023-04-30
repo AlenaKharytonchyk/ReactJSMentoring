@@ -6,9 +6,15 @@ exports[`MovieDetails renders snapshot 1`] = `
     class="movie-details-container"
     data-testid="movie-details"
   >
+    <div
+      class="details-close"
+      data-testid="details-close"
+    >
+      X
+    </div>
     <img
-      alt="First film"
-      src="https://picsum.photos/323/486?random=1"
+      alt="Fifty Shades Freed"
+      src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
     />
     <div
       class="side-container"
@@ -19,18 +25,18 @@ exports[`MovieDetails renders snapshot 1`] = `
         <h2
           class="title"
         >
-          First film
+          Fifty Shades Freed
         </h2>
         <span
           class="rating"
         >
-          8,2
+          6.1
         </span>
       </div>
       <div
         class="genre"
       >
-        drama, comedy
+        DramaRomance
       </div>
       <div
         class="year-wrapper"
@@ -38,18 +44,18 @@ exports[`MovieDetails renders snapshot 1`] = `
         <span
           class="year"
         >
-          2000
+          2018
         </span>
         <span
           class="duration"
         >
-          1.4
+          106 min
         </span>
       </div>
       <p
         class="description"
       >
-        Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra
+        Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.
       </p>
     </div>
   </div>

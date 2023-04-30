@@ -21,6 +21,21 @@
     }
   }
 
+  &-grey {
+    color: #F65261;
+    background: rgba(96, 96, 96, 0.68);
+
+    &:hover {
+      color: #FFFFFF;
+      background-color: #c84d7b;
+    }
+
+    &:active {
+      color: #FFFFFF;
+      background-color: #b10043;
+    }
+  }
+
   &-transparent {
     color: #F65261;
     border: 1px solid #F65261;
