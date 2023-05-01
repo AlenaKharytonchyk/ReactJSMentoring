@@ -21,7 +21,7 @@ exports[`MovieForm renders snapshot 1`] = `
         id="title"
         name="movie_name"
         type="text"
-        value="Fifty Shades Freed"
+        value="Star movie"
       />
     </div>
     <div
