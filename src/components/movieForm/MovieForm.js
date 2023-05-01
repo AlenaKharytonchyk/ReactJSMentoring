@@ -51,7 +51,7 @@ const validate = values => {
     return Object.keys(errors).length === 0 ? null : errors;
 };
 
-const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}) => {
+const MovieForm = ({formTitle, showModal}) => {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const [movie, setMovie ] = useState();
@@ -109,7 +109,7 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}
                 <form onSubmit={formik.handleSubmit}>
                     <div className="field-container">
                         <label htmlFor="title">{formLabels.title}</label>
-                        <input type="text" id="title" name="title"
+                        <input type="text" id="title" name="title" data-testid="film-title"
                                onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.title}/>
                         {formik.errors.title ? <div>{formik.errors.title}</div> : null}

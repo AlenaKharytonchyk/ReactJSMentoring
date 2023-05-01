@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { act } from 'react-dom/test-utils';
 import {MovieDetails, MovieListPage, SearchForm} from "../../components";
 import {moviesArray} from "../../mockedMovies";
-import {Router, MemoryRouter, Routes, Route, BrowserRouter} from "react-router-dom";
+import {Router, MemoryRouter, Routes, Route} from "react-router-dom";
 import {createMemoryHistory} from "history";
 
 const userInputData = 'star';
