@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import "./MovieTile.scss";
 import {Button, Dialog, MovieForm, PopUp} from "../index";
 import convertDateIntoYear from "../../utils";
+import {Outlet, useNavigate} from "react-router-dom";
 
 const MovieTile = ({movie, handleClick}) => {
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
 
     return (
         <>
@@ -15,7 +16,7 @@ const MovieTile = ({movie, handleClick}) => {
                 onClick={() => handleClick(movie.title)}
                 data-testid="movie-card"
             >
-                <PopUp movie={movie} onDelete={()=>setShowModal(true)} onEdit={()=>setShowEditModal(true)}/>
+                <PopUp movie={movie} onDelete={()=>setShowModal(true)} onEdit={()=>navigate(`/${movie.id}/edit`)}/>
                 <img src={movie.poster_path} alt={movie.title} />
                 <div className="title-container">
                     <h2 className="title">{movie.title}</h2>
@@ -31,12 +32,6 @@ const MovieTile = ({movie, handleClick}) => {
                 <div>Are you sure you want to delete this movie?</div>
                 <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} buttonClass="button-pink"/>
             </Dialog>
-            <MovieForm
-                showModal={showEditModal}
-                formTitle="edit movie"
-                initialMovie={movie}
-                onClose={() => setShowEditModal(false)}
-            />
         </>
     )
 }

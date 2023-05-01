@@ -21,14 +21,12 @@ const MovieDetails = () => {
                 signal: signal,
             })
             const data = await response.json();
-            console.warn("data", data)
             controller = null;
             setMovie(data);
         }
 
         fetchData();
     },[movieId]);
-    console.warn(movie)
     return (
             movie
             ? <>

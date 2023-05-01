@@ -3,6 +3,7 @@ import {MovieTile} from "../../components";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {moviesArray} from "../../mockedMovies";
+import {MemoryRouter} from "react-router-dom";
 
 describe("MovieTile", () => {
     it("presents on the page", () => {
@@ -10,11 +11,15 @@ describe("MovieTile", () => {
 
         const onClick = jest.fn();
 
-        render(<MovieTile
-            movie={moviesArray[0]}
-            key={moviesArray[0].id}
-            handleClick={onClick}
-        />)
+        render(
+            <MemoryRouter>
+                <MovieTile
+                    movie={moviesArray[0]}
+                    key={moviesArray[0].id}
+                    handleClick={onClick}
+                />
+            </MemoryRouter>
+        )
 
         expect(screen.queryByTestId('movie-card')).toBeInTheDocument();
     })
@@ -24,11 +29,15 @@ describe("MovieTile", () => {
 
         const onClick = jest.fn();
 
-        render(<MovieTile
-            movie={moviesArray[0]}
-            key={moviesArray[0].id}
-            handleClick={onClick}
-        />)
+        render(
+            <MemoryRouter>
+                <MovieTile
+                    movie={moviesArray[0]}
+                    key={moviesArray[0].id}
+                    handleClick={onClick}
+                />
+            </MemoryRouter>
+        )
 
         await userEvent.click(screen.queryByTestId('movie-card'));
 

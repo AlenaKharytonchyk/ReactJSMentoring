@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./MovieForm.scss";
 import {Dialog} from "../index";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
 
 let formLabels = {
@@ -36,7 +36,7 @@ const validate = values => {
 
     if (!values.poster_path) {
         errors.poster_path = 'Required';
-    } else if(!/www./gm.test(values.poster_path)) errors.poster_path = 'Invalid format'
+    } else if(!/https/gm.test(values.poster_path)) errors.poster_path = 'Invalid format'
 
     if (!values.vote_average) {
         errors.vote_average = 'Required';
@@ -53,31 +53,54 @@ const validate = values => {
 
 const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}) => {
     const navigate = useNavigate();
+    const {movieId} = useParams();
+    const [movie, setMovie ] = useState();
+    useEffect(() => {
+        let controller, signal;
+        const fetchData = async () => {
+            if (controller) {
+                controller.abort()
+            }
+            controller = new AbortController();
+            signal = controller.signal;
+
+            const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
+                signal: signal,
+            })
+            const data = await response.json();
+            controller = null;
+            setMovie(data);
+        }
+
+        movieId && fetchData();
+    },[movieId]);
     const handleReset = () => {
         document.querySelector('form').reset();
     };
 
+    console.warn(movie)
     const formik = useFormik({
         initialValues: {
-            title: '',
-            release_date: '',
-            poster_path: '',
-            runtime: null,
-            overview: '',
-            vote_average: null,
+            title: movie?.title ?? '',
+            release_date: movie?.release_date ?? '',
+            poster_path: movie?.poster_path ?? '',
+            runtime: movie?.runtime ?? null,
+            overview: movie?.overview ?? '',
+            vote_average: movie?.vote_average ?? null,
         },
         validate,
         onSubmit: async (values) => {
             await fetch('http://localhost:4000/movies', {
-                method: 'POST',
+                method: movie?.id ? 'PUT' : 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(values, null, 2)
+                body: JSON.stringify({...values, id: movie?.id}, null, 2)
             });
             navigate('/');
         },
+        enableReinitialize: true
     });
 
     return (

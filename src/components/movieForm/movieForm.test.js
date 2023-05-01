@@ -3,6 +3,7 @@ import {MovieForm} from "../../components";
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {moviesArray} from "../../mockedMovies";
+import {MemoryRouter} from "react-router-dom";
 
 describe("MovieForm", () => {
     it("renders snapshot", () => {
@@ -11,13 +12,15 @@ describe("MovieForm", () => {
         const onClose = jest.fn();
 
         render(
-            <div className="App">
-                <MovieForm
-                formTitle="Form title"
-                showModal={true}
-                onClose={onClose}
-                initialMovie={moviesArray[0]}/>
-            </div>
+            <MemoryRouter>
+                <div className="App">
+                    <MovieForm
+                        formTitle="Form title"
+                        showModal={true}
+                        onClose={onClose}
+                        initialMovie={moviesArray[0]}/>
+                </div>
+            </MemoryRouter>
         );
         const modalComponent = screen.getByTestId('movie-form');
         expect(modalComponent).toMatchSnapshot();
@@ -37,11 +40,15 @@ describe("MovieForm", () => {
             "sort": "all",
         }
 
-        render(<div className="App"><MovieForm
-            formTitle="Form title"
-            submitCallback={onSubmit}
-            showModal={true}
-            initialMovie={moviesArray[0]}/></div>);
+        render(
+            <MemoryRouter>
+                <div className="App"><MovieForm
+                    formTitle="Form title"
+                    submitCallback={onSubmit}
+                    showModal={true}
+                    initialMovie={moviesArray[0]}/></div>
+            </MemoryRouter>
+            );
 
         await userEvent.click(screen.queryByTestId('submit-button'));
 

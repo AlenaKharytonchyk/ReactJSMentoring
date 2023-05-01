@@ -18,13 +18,17 @@ export const routes = createBrowserRouter([
                 children: [
                     {
                         path: "/new",
-                        element: <MovieForm showModal={true} formTitle="Add MOVIE"/>
-                    }
+                        element: <MovieForm showModal={true} formTitle="Add MOVIE" />
+                    },
+                    {
+                        path: "/:movieId/edit",
+                        element: <MovieForm showModal={true} formTitle="Edit Movie" />
+                    },
                 ]
             },
             {
                 path: "/:movieId",
-                element: <MovieDetails />
+                element: <MovieDetails />,
             },
         ],
     },
