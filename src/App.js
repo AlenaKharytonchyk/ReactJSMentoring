@@ -1,6 +1,6 @@
 import './App.css';
 import {
-    MovieDetails,
+    MovieDetails, MovieForm,
     MovieListPage,
     SearchForm
 } from "./components";
@@ -13,12 +13,18 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <SearchForm />
+                element: <SearchForm />,
+                children: [
+                    {
+                        path: "/new",
+                        element: <MovieForm showModal={true} formTitle="Add MOVIE"/>
+                    }
+                ]
             },
             {
                 path: "/:movieId",
                 element: <MovieDetails />
-            }
+            },
         ],
     },
 ]);

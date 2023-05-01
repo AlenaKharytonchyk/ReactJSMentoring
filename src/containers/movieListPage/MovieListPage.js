@@ -10,7 +10,7 @@ import {
     MovieForm,
     SortControl,
 } from "../../components";
-import {Outlet, useSearchParams} from "react-router-dom";
+import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
 
 const options = [{
     option: "release date",
@@ -42,6 +42,8 @@ const MovieListPage = () => {
     const genreSortQuery = searchParams.get('filter') ?? genres[0];
 
     const [movieList, setMovieList] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         let controller, signal;
         const fetchData = async () => {
@@ -63,10 +65,10 @@ const MovieListPage = () => {
     },[searchParams, searchQuery, genreSortQuery, sortQuery]);
 
     return (
-        <div className={`movie-page-wrapper ${movieModalVisible ? 'modal-open' : ''}`}>
+        <div className={`movie-page-wrapper ${window.location.pathname === '/new' ? 'modal-open' : ''}`}>
             <div className="header">
                 <Logo/>
-                <Button buttonName="+ ADD MOVIE" buttonClass="button-grey" onClick={() => setMovieModalVisible(true)} />
+                <Button buttonName="+ ADD MOVIE" buttonClass="button-grey" onClick={() => navigate(`/new`)} />
                 <Outlet/>
             </div>
             <Container>
@@ -79,7 +81,6 @@ const MovieListPage = () => {
             </Container>
             <MovieContainer movieList={movieList} />
             <Footer />
-            <MovieForm showModal={movieModalVisible} formTitle="add movie" onClose={() => setMovieModalVisible(false)}/>
         </div>
     )
 }

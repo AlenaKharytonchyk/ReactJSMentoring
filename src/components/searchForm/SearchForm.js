@@ -1,6 +1,6 @@
 import React from "react";
 import {InputField, Title} from "../index";
-import {useSearchParams} from "react-router-dom";
+import {Outlet, useSearchParams} from "react-router-dom";
 
 const searchQueryInitial = "What do you want to watch?";
 
@@ -20,6 +20,7 @@ const SearchForm = () => {
                 inputValue={searchQuery}
                 onSearch={(value) => setSearchQuery(value)}
             />
+            <Outlet/>
         </>
     )
 }

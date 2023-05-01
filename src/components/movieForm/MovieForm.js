@@ -1,6 +1,8 @@
 import React from "react";
 import "./MovieForm.scss";
 import {Dialog} from "../index";
+import {useNavigate} from "react-router-dom";
+import {useFormik} from "formik";
 
 let formLabels = {
     title: 'title',
@@ -19,6 +21,7 @@ Object.keys(formLabels).forEach((key) => {
 });
 
 const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}) => {
+    const navigate = useNavigate();
     const handleReset = () => {
         document.querySelector('form').reset();
     };
@@ -27,11 +30,24 @@ const MovieForm = ({formTitle, submitCallback, initialMovie, showModal, onClose}
         event.preventDefault();
         const formData = Object.fromEntries(new FormData(event.target));
         submitCallback(formData);
+        // await fetch
+        // navigate('/')
         return false;
     };
 
+    const formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+
     return (
-        <Dialog title={formTitle} showModal={showModal} onClose={onClose}>
+        <Dialog title={formTitle} showModal={showModal} onClose={() => navigate('/')}>
             <div data-testid="movie-form" className="movie-form-container">
                 <form action="" method="post" onSubmit={handleSubmit}>
                     <div className="field-container">
