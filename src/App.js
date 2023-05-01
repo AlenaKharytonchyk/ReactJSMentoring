@@ -1,27 +1,6 @@
 import './App.css';
-import {
-    MovieDetails,
-    MovieListPage,
-    SearchForm
-} from "./components";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-export const routes = createBrowserRouter([
-    {
-        path: "/",
-        element: <MovieListPage />,
-        children: [
-            {
-                path: "/",
-                element: <SearchForm />
-            },
-            {
-                path: "/:movieId",
-                element: <MovieDetails />
-            }
-        ],
-    },
-]);
+import { RouterProvider } from "react-router-dom";
+import {routes} from "./routes";
 
 function App() {
   return (

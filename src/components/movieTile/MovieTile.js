@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import "./MovieTile.scss";
 import {Button, Dialog, MovieForm, PopUp} from "../index";
-import convertDateIntoYear from "../../utils";
+import {convertDateIntoYear} from "../../utils";
 
 const MovieTile = ({movie, handleClick}) => {
     const [showModal, setShowModal] = useState(false);
