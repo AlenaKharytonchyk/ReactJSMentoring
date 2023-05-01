@@ -1,6 +1,7 @@
 import './App.css';
 import {
-    MovieDetails, MovieForm,
+    MovieDetails,
+    MovieForm,
     MovieListPage,
     SearchForm
 } from "./components";

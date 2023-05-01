@@ -23,7 +23,6 @@ const genres = ["all", "comedy", "drama", "detective"];
 
 const MovieListPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [movieModalVisible, setMovieModalVisible] = useState(false);
 
     const setSortQuery = (sortQuery) => {
         const currentParams = new URLSearchParams(window.location.search)
