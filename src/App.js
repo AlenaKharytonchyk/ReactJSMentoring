@@ -1,12 +1,11 @@
 import './App.css';
-import {
-    MovieListPage
-} from "./components";
+import { RouterProvider } from "react-router-dom";
+import {routes} from "./routes";
 
 function App() {
   return (
       <div className="App">
-          <MovieListPage />
+          <RouterProvider router={routes} />
       </div>
   );
 }

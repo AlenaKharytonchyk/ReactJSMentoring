@@ -14,6 +14,7 @@ import MovieForm from "./movieForm/MovieForm";
 import MovieListPage from "../containers/movieListPage/MovieListPage";
 import Footer from "./footer/Footer";
 import Logo from "./logo/Logo";
+import SearchForm from "./searchForm/SearchForm";
 
 export {
     Button,
@@ -31,5 +32,6 @@ export {
     MovieForm,
     MovieListPage,
     Footer,
-    Logo
+    Logo,
+    SearchForm
 };

@@ -1,28 +1,41 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import "./MovieDetails.scss";
+import {useNavigate, useParams} from "react-router-dom";
+import {convertDateIntoYear, fetchData} from "../../utils";
+import {BASE_URL} from "../../constant";
 
-const MovieDetails = ({movie, onClose}) => {
+const MovieDetails = () => {
+    const navigate = useNavigate();
+    const {movieId} = useParams();
+    const [movie, setMovie ] = useState();
+    useEffect(() => {
+        fetchData(`${BASE_URL}/movies/${movieId}`, (data)=>setMovie(data))
+    },[movieId]);
     return (
-        <div
-            className="movie-details-container"
-            data-testid="movie-details"
-        >
-            <div className='details-close' onClick={onClose} data-testid="details-close">X</div>
-            <img src={movie.poster_path} alt={movie.title} />
-            <div className="side-container">
-                <div className="title-wrapper">
-                    <h2 className="title">{movie.title}</h2>
-                    <span className="rating">{movie.vote_average}</span>
+            movie
+            ? <>
+                    <div
+                    className="movie-details-container"
+                    data-testid="movie-details"
+                >
+                <div className='details-close' onClick={() => navigate('/')} data-testid="details-close">X</div>
+                <img src={movie.poster_path} alt={movie.title} />
+                <div className="side-container">
+                    <div className="title-wrapper">
+                        <h2 className="title">{movie.title}</h2>
+                        <span className="rating">{movie.vote_average}</span>
+                    </div>
+                    <div className="genre">{movie.genres}</div>
+                    <div className="year-wrapper">
+                        <span className="year">{convertDateIntoYear(movie.release_date)}</span>
+                        <span className="duration">{movie.runtime} min</span>
+                    </div>
+                    <p className="description">{movie.overview}</p>
                 </div>
-                <div className="genre">{movie.genres}</div>
-                <div className="year-wrapper">
-                    <span className="year">{new Date(movie.release_date).getFullYear()}</span>
-                    <span className="duration">{movie.runtime} min</span>
-                </div>
-                <p className="description">{movie.overview}</p>
             </div>
-        </div>
+        </>
+            : null
     )
 }
 
