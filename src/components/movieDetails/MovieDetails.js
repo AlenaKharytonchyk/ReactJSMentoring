@@ -2,30 +2,15 @@ import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import "./MovieDetails.scss";
 import {useNavigate, useParams} from "react-router-dom";
-import convertDateIntoYear from "../../utils";
+import {convertDateIntoYear, fetchData} from "../../utils";
+import {BASE_URL} from "../../constant";
 
 const MovieDetails = () => {
     const navigate = useNavigate();
     const {movieId} = useParams();
     const [movie, setMovie ] = useState();
     useEffect(() => {
-        let controller, signal;
-        const fetchData = async () => {
-            if (controller) {
-                controller.abort()
-            }
-            controller = new AbortController();
-            signal = controller.signal;
-
-            const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
-                signal: signal,
-            })
-            const data = await response.json();
-            controller = null;
-            setMovie(data);
-        }
-
-        fetchData();
+        fetchData(`${BASE_URL}/movies/${movieId}`, (data)=>setMovie(data))
     },[movieId]);
     return (
             movie

@@ -5,7 +5,10 @@ exports[`MovieForm renders snapshot 1`] = `
   class="movie-form-container"
   data-testid="movie-form"
 >
-  <form>
+  <form
+    action=""
+    method="post"
+  >
     <div
       class="field-container"
     >
@@ -16,9 +19,9 @@ exports[`MovieForm renders snapshot 1`] = `
       </label>
       <input
         id="title"
-        name="title"
+        name="movie_name"
         type="text"
-        value=""
+        value="Star movie"
       />
     </div>
     <div
@@ -33,22 +36,22 @@ exports[`MovieForm renders snapshot 1`] = `
         id="release_date"
         name="release_date"
         type="date"
-        value=""
+        value="2018-02-07"
       />
     </div>
     <div
       class="field-container"
     >
       <label
-        for="poster_path"
+        for="url"
       >
         MOVIE URL
       </label>
       <input
-        id="poster_path"
-        name="poster_path"
+        id="url"
+        name="movie_url"
         type="text"
-        value=""
+        value="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
       />
     </div>
     <div
@@ -62,23 +65,8 @@ exports[`MovieForm renders snapshot 1`] = `
       <input
         id="runtime"
         name="runtime"
-        type="number"
-        value=""
-      />
-    </div>
-    <div
-      class="field-container"
-    >
-      <label
-        for="vote_average"
-      >
-        RATING
-      </label>
-      <input
-        id="vote_average"
-        name="vote_average"
-        type="number"
-        value=""
+        type="text"
+        value="106"
       />
     </div>
     <div
@@ -132,20 +120,21 @@ exports[`MovieForm renders snapshot 1`] = `
       <textarea
         id="overview"
         name="overview"
-      />
+      >
+        Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.
+      </textarea>
     </div>
     <input
       class="button-transparent button"
       type="reset"
       value="RESET"
     />
-    <button
+    <input
       class="button-pink button"
       data-testid="submit-button"
       type="submit"
-    >
-      SUBMIT
-    </button>
+      value="SUBMIT"
+    />
   </form>
 </div>
 `;

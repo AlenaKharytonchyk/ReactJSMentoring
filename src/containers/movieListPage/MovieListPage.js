@@ -11,6 +11,8 @@ import {
     SortControl,
 } from "../../components";
 import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
+import {BASE_URL} from "../../constant";
+import {fetchData} from "../../utils";
 
 const options = [{
     option: "release date",
@@ -44,23 +46,7 @@ const MovieListPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        let controller, signal;
-        const fetchData = async () => {
-            if (controller) {
-                controller.abort()
-            }
-            controller = new AbortController();
-            signal = controller.signal;
-
-            const response = await fetch(`http://localhost:4000/movies?${searchParams.toString()}&sortOrder=asc&searchBy=title`, {
-                signal: signal,
-            })
-            const { data } = await response.json();
-            controller = null;
-            setMovieList(data);
-        }
-
-        fetchData();
+        fetchData(`${BASE_URL}/movies?${searchParams.toString()}&sortOrder=asc&searchBy=title`, ({data}) => setMovieList(data))
     },[searchParams, searchQuery, genreSortQuery, sortQuery]);
 
     return (
