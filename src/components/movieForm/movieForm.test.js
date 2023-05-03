@@ -54,7 +54,7 @@ describe("MovieForm", () => {
         await act(async () =>  await render(
             <Router  history={history} location={ history.location } navigator={ { push: history.push } } initialEntries={[`/`]}>
                 <Routes>
-                    <Route path="/:movieId/edit" element={<MovieForm/>}/>
+                    <Route path={`/${moviesArray[0].id}/edit`} element={<MovieForm formTitle={'magic'} showModal={true}/>}/>
                 </Routes>
                 {/*<MovieForm formTitle={'magic'} showModal={true}/>*/}
                 {/*<Routes>*/}
