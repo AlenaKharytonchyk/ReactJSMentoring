@@ -1,6 +1,6 @@
 import React from "react";
-import './Logo.scss';
+import styles from  './Logo.module.scss';
 
-const Logo = () => (<div className='logo'><span>netflix</span>roulette</div>)
+const Logo = ({classNames = ''}) => (<div className={`${styles.logo} ${classNames}` }><span>netflix</span>roulette</div>)
 
 export default Logo;

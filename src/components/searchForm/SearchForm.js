@@ -1,28 +1,34 @@
-import React from "react";
-import {InputField, Title} from "../index";
-import {Outlet, useSearchParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { InputField, Title } from '../index';
 
-const searchQueryInitial = "What do you want to watch?";
+const searchQueryInitial = 'What do you want to watch?';
 
 const SearchForm = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const setSearchQuery = (searchQuery) => {
-        const currentParams = new URLSearchParams(window.location.search)
-        currentParams.set('search', searchQuery);
-        setSearchParams(currentParams);
-    };
-    const searchQuery = searchParams.get('search') || searchQueryInitial;
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState(
+    router.query.search || searchQueryInitial
+  );
 
-    return (
-        <>
-            <Title title="Find your movie" />
-            <InputField
-                inputValue={searchQuery}
-                onSearch={(value) => setSearchQuery(value)}
-            />
-            <Outlet/>
-        </>
-    )
-}
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, search: value },
+    });
+  };
+
+  // Update the searchQuery state when the search query parameter changes
+  useEffect(() => {
+    setSearchQuery(router.query.search || searchQueryInitial);
+  }, [router.query.search]);
+
+  return (
+    <>
+      <Title title='Find your movie' />
+      <InputField inputValue={searchQuery} onSearch={handleSearch} />
+    </>
+  );
+};
 
 export default SearchForm;

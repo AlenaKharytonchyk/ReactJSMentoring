@@ -1,37 +1,31 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import "./MovieDetails.scss";
-import {useNavigate, useParams} from "react-router-dom";
-import {convertDateIntoYear, fetchData} from "../../utils";
-import {BASE_URL} from "../../constant";
+import styles from "./MovieDetails.module.scss";
+import { useRouter } from "next/router";
+import {convertDateIntoYear} from "../../utils";
 
-const MovieDetails = () => {
-    const navigate = useNavigate();
-    const {movieId} = useParams();
-    const [movie, setMovie ] = useState();
-    useEffect(() => {
-        fetchData(`${BASE_URL}/movies/${movieId}`, (data)=>setMovie(data))
-    },[movieId]);
+const MovieDetails = ({ movie }) => {
+    const router = useRouter();
     return (
             movie
             ? <>
                     <div
-                    className="movie-details-container"
+                    className={styles["movie-details-container"]}
                     data-testid="movie-details"
                 >
-                <div className='details-close' onClick={() => navigate('/')} data-testid="details-close">X</div>
+                <div className={styles["details-close"]} onClick={() => router.push('/')} data-testid="details-close">X</div>
                 <img src={movie.poster_path} alt={movie.title} />
-                <div className="side-container">
-                    <div className="title-wrapper">
-                        <h2 className="title">{movie.title}</h2>
-                        <span className="rating">{movie.vote_average}</span>
+                <div className={styles["side-container"]}>
+                    <div className={styles["title-wrapper"]}>
+                        <h2 className={styles.title}>{movie.title}</h2>
+                        <span className={styles.rating}>{movie.vote_average}</span>
                     </div>
-                    <div className="genre">{movie.genres}</div>
-                    <div className="year-wrapper">
-                        <span className="year">{convertDateIntoYear(movie.release_date)}</span>
-                        <span className="duration">{movie.runtime} min</span>
+                    <div className={styles.genre}>{movie.genres}</div>
+                    <div className={styles["year-wrapper"]}>
+                        <span className={styles.year}>{convertDateIntoYear(movie.release_date)}</span>
+                        <span className={styles.duration}>{movie.runtime} min</span>
                     </div>
-                    <p className="description">{movie.overview}</p>
+                    <p className={styles.description}>{movie.overview}</p>
                 </div>
             </div>
         </>
@@ -58,4 +52,5 @@ MovieDetails.defaultProps = {
     genre: ["Mocked genre"],
     year: "Mocked year",
 }
+
 export default MovieDetails;

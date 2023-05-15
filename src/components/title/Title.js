@@ -1,5 +1,5 @@
 import React from "react";
-import "./Title.scss";
+import styles from  "./Title.module.scss";
 
 export default class Title extends React.Component {
     constructor({title}) {
@@ -7,6 +7,6 @@ export default class Title extends React.Component {
         this.title = title;
     }
     render() {
-        return React.createElement('h1', {className: 'title'}, this.title);
+        return React.createElement('h1', {className: styles.title}, this.title);
     }
 }

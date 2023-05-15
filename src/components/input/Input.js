@@ -1,5 +1,5 @@
 import React from "react";
-import './Input.scss';
+import styles from './Input.module.scss';
 import { Button } from "../../components";
 
 export default class InputField extends React.Component {
@@ -17,11 +17,11 @@ export default class InputField extends React.Component {
 
     render() {
         return (
-            <div className="input-wrapper">
+            <div className={styles["input-wrapper"]}>
                 {React.createElement(
                     'input',
                     {
-                        className: 'input-field',
+                        className: styles["input-field"],
                         placeholder: 'What do you want to watch',
                         type: "text",
                         onChange: (event) => this.changeValue(event),
@@ -33,6 +33,7 @@ export default class InputField extends React.Component {
                     })}
                 <Button
                     buttonName="search"
+                    buttonClass={styles["button"]}
                     onClick={() => this.onSearch(this.state.inputValue)}
                 />
             </div>

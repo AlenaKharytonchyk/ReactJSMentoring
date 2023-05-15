@@ -1,5 +1,5 @@
 import React from "react";
-import "./SortControl.scss";
+import styles from "./SortControl.module.scss";
 
 const SortControl = ({selectedOption, options, onSelect}) => {
     const handleChange = (e) => {
@@ -7,7 +7,7 @@ const SortControl = ({selectedOption, options, onSelect}) => {
     }
 
     return (
-        <div className="sorting-container">
+        <div className={styles["sorting-container"]}>
             <label htmlFor="sort">SORT BY</label>
 
             <select name="sort" id="sort" data-testid="sorting" onChange={handleChange} defaultValue={selectedOption} >

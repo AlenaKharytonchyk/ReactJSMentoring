@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
-import "./MovieForm.scss";
+import React from "react";
+import styles from "./MovieForm.module.scss";
 import {Dialog} from "../index";
-import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
+import { useRouter } from 'next/router';
 
 let formLabels = {
     title: 'title',
@@ -51,34 +51,24 @@ const validate = values => {
     return Object.keys(errors).length === 0 ? null : errors;
 };
 
-const MovieForm = ({formTitle, showModal}) => {
-    const navigate = useNavigate();
-    const {movieId} = useParams();
-    const [movie, setMovie ] = useState();
-    useEffect(() => {
-        let controller, signal;
-        const fetchData = async () => {
-            if (controller) {
-                controller.abort()
-            }
-            controller = new AbortController();
-            signal = controller.signal;
+const MovieForm = ({initialMovie: movie = {},formTitle, showModal}) => {
+    const router = useRouter();
+    const onSubmit = async (values) => {
+        await fetch('http://localhost:4000/movies', {
+            method: movie?.id ? 'PUT' : 'POST',
+            headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ...values, id: movie?.id }, null, 2),
+        });
+        router.push('/');
+    };
 
-            const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
-                signal: signal,
-            })
-            const data = await response.json();
-            controller = null;
-            setMovie(data);
-        }
-
-        movieId && fetchData();
-    },[movieId]);
     const handleReset = () => {
         document.querySelector('form').reset();
     };
 
-    console.warn(movie)
     const formik = useFormik({
         initialValues: {
             title: movie?.title ?? '',
@@ -89,58 +79,48 @@ const MovieForm = ({formTitle, showModal}) => {
             vote_average: movie?.vote_average ?? null,
         },
         validate,
-        onSubmit: async (values) => {
-            await fetch('http://localhost:4000/movies', {
-                method: movie?.id ? 'PUT' : 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({...values, id: movie?.id}, null, 2)
-            });
-            navigate('/');
-        },
-        enableReinitialize: true
-    });
+        onSubmit,
+        enableReinitialize: true,
+      });
 
     return (
-        <Dialog title={formTitle} showModal={showModal} onClose={() => navigate('/')}>
-            <div data-testid="movie-form" className="movie-form-container">
+        <Dialog title={formTitle} showModal={showModal} onClose={() => router.push('/')}>
+            <div data-testid="movie-form" className={styles["movie-form-container"]}>
                 <form onSubmit={formik.handleSubmit}>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="title">{formLabels.title}</label>
                         <input type="text" id="title" name="title" data-testid="film-title"
                                onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.title}/>
                         {formik.errors.title ? <div>{formik.errors.title}</div> : null}
                     </div>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="release_date">{formLabels.release_date}</label>
                         <input type="date" id="release_date" name="release_date"
                                onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.release_date}/>
                         {formik.errors.release_date ? <div>{formik.errors.release_date}</div> : null}
                     </div>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="poster_path">{formLabels.poster_path}</label>
                         <input type="text" id="poster_path" name="poster_path"
                                onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.poster_path}/>
                         {formik.errors.poster_path ? <div>{formik.errors.poster_path}</div> : null}
                     </div>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="runtime">{formLabels.runtime}</label>
                         <input type="number" id="runtime" name="runtime" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.runtime}/>
                         {formik.errors.runtime ? <div>{formik.errors.runtime}</div> : null}
                     </div>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="vote_average">{formLabels.vote_average}</label>
                         <input type="number" id="vote_average" name="vote_average" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                defaultValue={formik.initialValues.vote_average}/>
                         {formik.errors.vote_average ? <div>{formik.errors.vote_average}</div> : null}
                     </div>
-                    <div className="field-container">
+                    <div className={styles["field-container"]}>
                         <label htmlFor="genre">{formLabels.genre}</label>
                         <select name="sort" id="sort" data-testid="sorting">
                             {
@@ -148,14 +128,14 @@ const MovieForm = ({formTitle, showModal}) => {
                             }
                         </select>
                     </div>
-                    <div className="field-container full-width">
+                    <div className={`${styles["field-container"]} ${styles["full-width"]}`}>
                         <label htmlFor="overview">{formLabels.overview}:</label>
                         <textarea id="overview" name="overview" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                   defaultValue={formik.initialValues.overview}></textarea>
                         {formik.errors.overview ? <div>{formik.errors.overview}</div> : null}
                     </div>
-                    <input onReset={handleReset} className="button-transparent button" type="reset" value="RESET"/>
-                    <button data-testid="submit-button" className="button-pink button" type="submit">SUBMIT</button>
+                    <input onReset={handleReset} className={`${styles["button-transparent"]} ${styles.button}`} type="reset" value="RESET"/>
+                    <button data-testid="submit-button" className={`${styles["button-pink"]} ${styles.button}`} type="submit">SUBMIT</button>
                 </form>
             </div>
         </Dialog>
