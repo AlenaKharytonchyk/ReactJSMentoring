@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
-import "./MovieForm.scss";
-import {Dialog} from "../index";
 import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
+import {Dialog} from "../index";
+import {BASE_URL} from "../../constant";
+import "./MovieForm.scss";
+
 
 let formLabels = {
     title: 'title',
@@ -15,6 +17,7 @@ let formLabels = {
 };
 
 const genreOptions = ["all", "comedy", "drama", "detective"];
+const REQUIRED_LABEL = 'Required';
 
 Object.keys(formLabels).forEach((key) => {
     formLabels[key] = formLabels[key].toUpperCase();
@@ -23,30 +26,30 @@ Object.keys(formLabels).forEach((key) => {
 const validate = values => {
     const errors = {};
     if (!values.title) {
-        errors.title = 'Required';
+        errors.title = REQUIRED_LABEL;
     } else if (values.title.length > 20) {
         errors.title = 'Must be 15 characters or less';
     }
 
     if (!values.release_date) {
-        errors.release_date = 'Required';
+        errors.release_date = REQUIRED_LABEL;
     } else if (!/(20|19)[0-9]{2}-([0-1][0-9]|[0-2][0-9])-([0-2][0-9]|[3][0-1])/.test(values.release_date)) {
         errors.release_date = 'Invalid date';
     }
 
     if (!values.poster_path) {
-        errors.poster_path = 'Required';
+        errors.poster_path = REQUIRED_LABEL;
     } else if(!/https/gm.test(values.poster_path)) errors.poster_path = 'Invalid format'
 
     if (!values.vote_average) {
-        errors.vote_average = 'Required';
+        errors.vote_average = REQUIRED_LABEL;
     } else if (typeof(+values.vote_average) !== 'number') errors.vote_average='Add a number';
 
     if(!values.runtime) {
-        errors.runtime = 'Required';
+        errors.runtime = REQUIRED_LABEL;
     } else if (typeof(+values.runtime) !== 'number') errors.runtime='Add a number';
 
-    if(!values.overview) errors.overview = 'Required';
+    if(!values.overview) errors.overview = REQUIRED_LABEL;
 
     return Object.keys(errors).length === 0 ? null : errors;
 };
@@ -64,7 +67,7 @@ const MovieForm = ({formTitle, showModal}) => {
             controller = new AbortController();
             signal = controller.signal;
 
-            const response = await fetch(`http://localhost:4000/movies/${movieId}`, {
+            const response = await fetch(`${BASE_URL}/movies/${movieId}`, {
                 signal: signal,
             })
             const data = await response.json();
@@ -78,7 +81,6 @@ const MovieForm = ({formTitle, showModal}) => {
         document.querySelector('form').reset();
     };
 
-    console.warn(movie)
     const formik = useFormik({
         initialValues: {
             title: movie?.title ?? '',
@@ -90,7 +92,7 @@ const MovieForm = ({formTitle, showModal}) => {
         },
         validate,
         onSubmit: async (values) => {
-            await fetch('http://localhost:4000/movies', {
+            await fetch(`${BASE_URL}/movies/${movie?.id ? movieId : ''}`, {
                 method: movie?.id ? 'PUT' : 'POST',
                 headers: {
                     'Accept': 'application/json',
