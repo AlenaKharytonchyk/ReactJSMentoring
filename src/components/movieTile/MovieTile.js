@@ -1,28 +1,28 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import "./MovieTile.scss";
-import {Button, Dialog, MovieForm, PopUp} from "../index";
+import styles from "./MovieTile.module.scss";
+import {Button, Dialog, PopUp} from "../index";
 import {convertDateIntoYear} from "../../utils";
-import {Outlet, useNavigate} from "react-router-dom";
+import { useRouter} from "next/router";
 
 const MovieTile = ({movie, handleClick}) => {
-    const navigate = useNavigate();
+    const router = useRouter();
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
             <div
-                className="movie-card-container"
+                className={styles["movie-card-container"]}
                 onClick={() => handleClick(movie.title)}
                 data-testid="movie-card"
             >
-                <PopUp movie={movie} onDelete={()=>setShowModal(true)} onEdit={()=>navigate(`/${movie.id}/edit`)}/>
+                <PopUp movie={movie} onDelete={()=>setShowModal(true)} onEdit={()=>router.push(`/${movie.id}/edit`)}/>
                 <img src={movie.poster_path} alt={movie.title} />
-                <div className="title-container">
-                    <h2 className="title">{movie.title}</h2>
-                    <span className="year">{convertDateIntoYear(movie.release_date)}</span>
+                <div className={styles["title-container"]}>
+                    <h2 className={styles["title"]}>{movie.title}</h2>
+                    <span className={styles["year"]}>{convertDateIntoYear(movie.release_date)}</span>
                 </div>
-                <div className="genre">{movie.genres}</div>
+                <div className={styles["genre"]}>{movie.genres}</div>
             </div>
             <Dialog
                 showModal ={showModal}
@@ -30,7 +30,7 @@ const MovieTile = ({movie, handleClick}) => {
                 onClose={() => setShowModal(false)}
             >
                 <div>Are you sure you want to delete this movie?</div>
-                <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} buttonClass="button-pink"/>
+                <Button onClick={() => alert('Confirm')} buttonName={'confirm'.toUpperCase()} classList={["button-pink"]}/>
             </Dialog>
         </>
     )

@@ -1,5 +1,5 @@
 import React from "react";
-import "./GenreSelect.scss";
+import styles from "./GenreSelect.module.scss";
 
 export default class GenreSelect extends React.Component {
     constructor({genreList, onSelect, selected}) {
@@ -20,12 +20,12 @@ export default class GenreSelect extends React.Component {
 
     render() {
         return(
-            React.createElement('ul', {className: 'genre-container'},
+            React.createElement('ul', {className: styles['genre-container']},
                 this.genreList
                     .map((genre, index) => React.createElement(
                         'li',
                         {
-                            className: this.state.selected === genre ? "genre active" : "genre",
+                            className: this.state.selected === genre ? styles.active + ' ' + styles.genre : styles.genre,
                             'data-testid': `test-${genre}`,
                             key: `${genre}-${index}`,
                             onClick: () => this.handleSelect(genre),
