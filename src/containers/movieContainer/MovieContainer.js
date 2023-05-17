@@ -1,18 +1,19 @@
 import React from "react";
 import {MovieTile} from "../../components";
-import "./MovieContainer.scss";
-import {useNavigate} from "react-router-dom";
+import styles from "./MovieContainer.module.scss";
+import { useRouter } from 'next/router';
 
 const MovieContainer = ({movieList}) => {
-    const navigate = useNavigate();
+    const router = useRouter();
+
     return (
-        <div className="movie-wrapper">
+        <div className={styles["movie-wrapper"]}>
             {
                 movieList.map((movie) => (
                     <MovieTile
                         movie={movie}
                         key={movie.id}
-                        handleClick={() => navigate(`/${movie.id}`)}
+                        handleClick={() => router.push(`/${movie.id}`)}
                     />
                 ))
             }

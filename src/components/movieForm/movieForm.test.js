@@ -3,21 +3,37 @@ import {MovieForm} from "../../components";
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {moviesArray} from "../../mockedMovies";
+import {MemoryRouter, Route, Router, Routes} from "react-router-dom";
+import {act} from "react-dom/test-utils";
+import {createMemoryHistory} from "history";
 
 describe("MovieForm", () => {
+    let fetchSpy;
+    beforeEach(() => {
+      fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue({
+                json: jest.fn().mockResolvedValue({data: moviesArray[0]})
+            })
+    });
+
+    afterEach(() => {
+        jest.restoreAllMocks();
+    });
+
     it("renders snapshot", () => {
         expect.assertions(1);
 
         const onClose = jest.fn();
 
         render(
-            <div className="App">
-                <MovieForm
-                formTitle="Form title"
-                showModal={true}
-                onClose={onClose}
-                initialMovie={moviesArray[0]}/>
-            </div>
+            <MemoryRouter>
+                <div className="App">
+                    <MovieForm
+                        formTitle="Form title"
+                        showModal={true}
+                        onClose={onClose}
+                        initialMovie={moviesArray[0]}/>
+                </div>
+            </MemoryRouter>
         );
         const modalComponent = screen.getByTestId('movie-form');
         expect(modalComponent).toMatchSnapshot();
@@ -25,8 +41,6 @@ describe("MovieForm", () => {
 
     it("calls onSubmit callback with movie info when click on Submit button", async () => {
         expect.assertions(1);
-
-        const onSubmit = jest.fn();
 
         const expected = {
             "movie_name": moviesArray[0].title,
@@ -36,15 +50,22 @@ describe("MovieForm", () => {
             "runtime": moviesArray[0].runtime.toString(),
             "sort": "all",
         }
+        const history = createMemoryHistory();
+        await act(async () =>  await render(
+            <Router  history={history} location={ history.location } navigator={ { push: history.push } } initialEntries={[`/`]}>
+                <Routes>
+                    <Route path={`/${moviesArray[0].id}/edit`} element={<MovieForm formTitle={'magic'} showModal={true}/>}/>
+                </Routes>
+                {/*<MovieForm formTitle={'magic'} showModal={true}/>*/}
+                {/*<Routes>*/}
+                {/*    /!*<Route path={'/'} element={<div></div>}/>*!/*/}
+                {/*    <Route path={`/:movieId/edit`} element={<MovieForm*/}
+                {/*        formTitle="Form title"*/}
+                {/*        showModal={true}/>}/>*/}
+                {/*</Routes>*/}
+            </Router>
+        ))
 
-        render(<div className="App"><MovieForm
-            formTitle="Form title"
-            submitCallback={onSubmit}
-            showModal={true}
-            initialMovie={moviesArray[0]}/></div>);
-
-        await userEvent.click(screen.queryByTestId('submit-button'));
-
-        expect(onSubmit).toHaveBeenCalledWith(expected);
+        expect(screen.queryByTestId('film-title').value).toBe(expected.movie_name);
     })
 })

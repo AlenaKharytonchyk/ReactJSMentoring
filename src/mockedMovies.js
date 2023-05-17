@@ -1,10 +1,3 @@
-import {createMemoryHistory} from "history";
-import {act} from "react-dom/test-utils";
-import {fireEvent, render, screen} from "@testing-library/react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {MovieDetails, MovieListPage, SearchForm} from "./components";
-import userEvent from "@testing-library/user-event";
-
 export const moviesArray = [
     {
         id: 337167,

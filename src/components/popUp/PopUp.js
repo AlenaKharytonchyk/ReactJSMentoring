@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import "./PopUp.scss";
-import {Button, Dialog, MovieForm} from "../index";
+import styles from  "./PopUp.module.scss";
 
 const PopUp = ({onDelete, onEdit}) => {
     const [opened, setOpened] = useState(false);
@@ -32,14 +31,14 @@ const PopUp = ({onDelete, onEdit}) => {
     return (
         <>
             {opened
-                ? (<div className="open-state">
+                ? (<div className={styles["open-state"]}>
                     <div onClick={closeMenu} data-testid="popup-close">X</div>
-                    <div className="wrapper">
+                    <div className={styles["wrapper"]}>
                         <span onClick={handleEditClick}>EDIT</span>
                         <span onClick={handleClick}>DELETE</span>
                     </div>
                 </div>)
-                : (<div className="close-state" onClick={expandMenu} data-testid="popup-open">
+                : (<div className={styles["close-state"]}onClick={expandMenu} data-testid="popup-open">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 256 256"><path fill="white" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28Zm-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28Zm0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28Z"/></svg>
                 </div>)
             }

@@ -1,73 +1,68 @@
-import React, {useEffect, useState} from "react";
-import './MovieListPage.scss';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
-    Button,
     Container,
-    Footer,
     GenreSelect,
-    Logo,
     MovieContainer,
-    MovieForm,
     SortControl,
-} from "../../components";
-import {Outlet, useSearchParams} from "react-router-dom";
-import {BASE_URL} from "../../constant";
-import {fetchData} from "../../utils";
+} from '../../components';
+import { BASE_URL } from '../../constant'; 
+import { fetchData } from '../../utils';
 
-const options = [{
-    option: "release date",
-    value: "release_date",
-    },{
-    option: "title",
-    value: "title",
-    }];
-const genres = ["all", "comedy", "drama", "detective"];
+const options = [
+  {
+    option: 'release date',
+    value: 'release_date',
+  },
+  {
+    option: 'title',
+    value: 'title',
+  },
+];
+const genres = ['all', 'comedy', 'drama', 'detective'];
 
-const MovieListPage = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [movieModalVisible, setMovieModalVisible] = useState(false);
+export default function MovieListPage({ initialMovieList = [] }) {
+  const router = useRouter();
+  const { query } = router;
+  const { search, sortBy, filter } = query;
 
-    const setSortQuery = (sortQuery) => {
-        const currentParams = new URLSearchParams(window.location.search)
-        currentParams.set('sortBy', sortQuery);
-        setSearchParams(currentParams);
-    };
+  const [movieList, setMovieList] = useState(initialMovieList);
 
-    const setGenreSortQuery = (genreSortQuery) => {
-        const currentParams = new URLSearchParams(window.location.search)
-        currentParams.set("filter", genreSortQuery === genres[0] ? '' : genreSortQuery)
-        setSearchParams(currentParams);
-    };
+  useEffect(() => {
+    if (search || sortBy || filter) {
+      fetchData(
+        `${BASE_URL}/movies?search=${search || ''}&sortBy=${sortBy || ''}&filter=${
+          filter || ''
+        }&sortOrder=asc&searchBy=title`
+      ).then((data) => setMovieList(data.data));
+    }
+  }, [search, sortBy, filter]);
 
-    const searchQuery = searchParams.get('search');
-    const sortQuery = searchParams.get('sortBy');
-    const genreSortQuery = searchParams.get('filter') ?? genres[0];
+  const setSortQuery = (sortQuery) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, sortBy: sortQuery },
+    });
+  };
 
-    const [movieList, setMovieList] = useState([]);
-    useEffect(() => {
-        fetchData(`${BASE_URL}/movies?${searchParams.toString()}&sortOrder=asc&searchBy=title`, ({data}) => setMovieList(data))
-    },[searchParams, searchQuery, genreSortQuery, sortQuery]);
+  const setGenreSortQuery = (genreSortQuery) => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, filter: genreSortQuery === genres[0] ? '' : genreSortQuery },
+    });
+  };
 
-    return (
-        <div className={`movie-page-wrapper ${movieModalVisible ? 'modal-open' : ''}`}>
-            <div className="header">
-                <Logo/>
-                <Button buttonName="+ ADD MOVIE" buttonClass="button-grey" onClick={() => setMovieModalVisible(true)} />
-                <Outlet/>
-            </div>
-            <Container>
-                <GenreSelect
-                    genreList={genres}
-                    onSelect={(genre) => setGenreSortQuery(genre)}
-                    selected={genreSortQuery}
-                />
-                <SortControl selectedOption={sortQuery} options={options} onSelect={(option) => setSortQuery(option)} />
-            </Container>
-            <MovieContainer movieList={movieList} />
-            <Footer />
-            <MovieForm showModal={movieModalVisible} formTitle="add movie" onClose={() => setMovieModalVisible(false)}/>
-        </div>
-    )
+  return (
+    <>
+      <Container>
+        <GenreSelect
+          genreList={genres}
+          onSelect={setGenreSortQuery}
+          selected={filter || genres[0]}
+        />
+        <SortControl selectedOption={sortBy} options={options} onSelect={setSortQuery} />
+      </Container>
+      <MovieContainer movieList={movieList} />
+    </>
+  );
 }
-
-export default MovieListPage;

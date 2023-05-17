@@ -1,22 +1,23 @@
 import React from "react";
-import "./Button.scss";
+import styles from "./Button.module.scss";
 
-export default class Button extends React.Component {
-    constructor({buttonName, priority, onClick, buttonClass}) {
-        super();
-        this.buttonName = buttonName;
-        this.buttonClass = buttonClass;
-        this.priority = priority;
-        this.onClick = onClick;
-    }
+const Button = ({ buttonName, priority, onClick, classList }) => {
+    const handleClick = () => {
+      onClick(priority);
+    };
 
-    render() {
-        return React.createElement(
-            'button',
-            {
-                className: `button button-${this.buttonName} ${this.buttonClass}`,
-                onClick: () => this.onClick(this.priority),
-            },
-            this.buttonName);
-    }
+    const classListString = classList?.reduce((acc, item) => {
+      const className = styles[item] ?? item;
+      return `${acc} ${className}`;
+    }, '');
+  
+    return (
+      <button
+        className={`${styles.button} ${styles[`button-${buttonName}`] ?? ''} ${classListString}`}
+        onClick={handleClick}
+      >
+        {buttonName}
+      </button>
+    );
 }
+export default Button;

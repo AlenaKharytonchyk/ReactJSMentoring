@@ -64,6 +64,39 @@
 
     .button {
       margin-right: unset;
+      border-radius: 4px;
+      color: #FFFFFF;
+      padding: 18px;
+      font-size: 20px;
+      line-height: 24px;
+      border: none;
+      cursor: pointer;
+
+      &-transparent {
+        color: #F65261;
+        border: 1px solid #F65261;
+        background: transparent;
+    
+        &:hover {
+          border: 1px solid #c84d7b;
+        }
+    
+        &:active {
+          border: 1px solid #b10043;
+        }
+      }
+
+      &-pink{
+        background: #F65261;
+
+        &:hover {
+          background-color: #c84d7b;
+        }
+
+        &:active {
+          background-color: #b10043;
+        }
+      }
     }
   }
 }
